@@ -11,18 +11,19 @@ router.get('/:id', gameController.getSingle);
 
 router.post(
   '/',
-  isAuthenticated,
+  // isAuthenticated,
   validation.saveGame,
   gameController.create
 );
 
 router.put(
   '/:id',
-  isAuthenticated,
+  // isAuthenticated,
   validation.saveGame,
   gameController.modify
 );
 
-router.delete('/:id', isAuthenticated, gameController.deleteOne);
+router.delete('/:id', gameController.deleteOne);
+// router.delete('/:id', isAuthenticated, gameController.deleteOne);
 
 module.exports = router;
