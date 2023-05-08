@@ -15,7 +15,7 @@ const getSingle = async (req, res, next) => {
   const gameid = new ObjectId(req.params.id);
   const result = await mongodb
     .getDb()
-    .db('CSE341W02')
+    .db('341Final')
     .collection('game')
     .find({ _id: gameid });
   result.toArray().then((lists) => {
@@ -52,7 +52,7 @@ const create = async (req, res, next) => {
   } else {
     const result = await mongodb
       .getDb()
-      .db('CSE341W02')
+      .db('341Final')
       .collection('game')
       .insertOne({
         gameTitle: req.body.gameTitle,
@@ -88,7 +88,7 @@ const modify = async (req, res, next) => {
   let title, year, language, length, rat;
   let result = await mongodb
     .getDb()
-    .db('CSE341W02')
+    .db('341Final')
     .collection('game')
     .find({ _id: gameid })
     .toArray();
@@ -135,7 +135,7 @@ const modify = async (req, res, next) => {
   }
   result = await mongodb
     .getDb()
-    .db('CSE341W02')
+    .db('341Final')
     .collection('game')
     .updateOne(
       { _id: gameid },
@@ -159,14 +159,14 @@ const deleteOne = async (req, res, next) => {
   const gameid = new ObjectId(req.params.id);
   const checkID = await mongodb
     .getDb()
-    .db('CSE341W02')
+    .db('341Final')
     .collection('game')
     .find({ _id: gameid })
     .toArray();
   if (checkID.length > 0) {
     const result = await mongodb
       .getDb()
-      .db('CSE341W02')
+      .db('341Final')
       .collection('game')
       .deleteOne({ _id: gameid });
     res.setHeader('Content-Type', 'application/json');

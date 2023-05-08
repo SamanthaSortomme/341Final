@@ -4,7 +4,7 @@ const ObjectId = require('mongodb').ObjectId;
 const { check, validationResult } = require('express-validator')
 
 const getAll = async (req, res, next) => {
-  const result = await mongodb.getDb().db('CSE341W02').collection('user').find();
+  const result = await mongodb.getDb().db('341Final').collection('user').find();
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
@@ -13,7 +13,7 @@ const getAll = async (req, res, next) => {
 
 const getSingle = async (req, res, next) => {
   const userid = new ObjectId(req.params.id);
-  const result = await mongodb.getDb().db('CSE341W02').collection('user').find({ _id: userid });
+  const result = await mongodb.getDb().db('341Final').collection('user').find({ _id: userid });
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists[0]);
@@ -31,7 +31,7 @@ const create = async (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(400).json("gamesPlayed is a required field");
   } else {
-    const result = await mongodb.getDb().db('CSE341W02').collection('user').insertOne({
+    const result = await mongodb.getDb().db('341Final').collection('user').insertOne({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       gamesPlayed: req.body.gamesPlayed
@@ -60,7 +60,7 @@ const modify = async (req, res, next) => {
   }
 
   let firstName, lastName, gamesPlayed;
-  let result = await mongodb.getDb().db('CSE341W02').collection('user').find({ _id: userid }).toArray();
+  let result = await mongodb.getDb().db('341Final').collection('user').find({ _id: userid }).toArray();
   // collection.find
   if (result.length == 0){
     res.setHeader('Content-Type', 'application/json');
@@ -87,7 +87,7 @@ const modify = async (req, res, next) => {
     gamesPlayed = req.body.gamesPlayed
   }
 
-  result = await mongodb.getDb().db('CSE341W02').collection('user').updateOne({_id: userid},
+  result = await mongodb.getDb().db('341Final').collection('user').updateOne({_id: userid},
   {
   $set: {firstName: firstName,
     lastName: lastName,
@@ -100,10 +100,10 @@ const modify = async (req, res, next) => {
 
 const deleteOne = async (req, res, next) => {
   const userid = new ObjectId(req.params.id);
-  const checkID = await mongodb.getDb().db('CSE341W02').collection('user').find({ _id: userid }).toArray();
+  const checkID = await mongodb.getDb().db('341Final').collection('user').find({ _id: userid }).toArray();
   if(checkID.length > 0)
   {
-    const result = await mongodb.getDb().db('CSE341W02').collection('user').deleteOne({_id: userid});
+    const result = await mongodb.getDb().db('341Final').collection('user').deleteOne({_id: userid});
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json("Documents deleted:" + result.deletedCount);
   };
