@@ -5,7 +5,7 @@ const doc = {
     title: 'My API',
     description: 'Contact API',
   },
-  host: '341Final.onrender.com',
+  host: 'three41final.onrender.com',
   // host: 'localhost:8080',
   schemes: ['https'],
   // schemes: ['http'],

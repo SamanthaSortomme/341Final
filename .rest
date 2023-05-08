@@ -15,28 +15,30 @@ GET http://localhost:8080/user/643e01b3d9fee2c621140f96
 
 ###
 
-GET https://cse341l02.onrender.com/user
+GET https://341Final.onrender.com/user
 
 ###
-GET https://cse341l02.onrender.com/user/643e01b3d9fee2c621140f94
+GET https://341Final.onrender.com/user/643e01b3d9fee2c621140f94
 
 ###
-GET https://cse341l02.onrender.com/user/643e01b3d9fee2c621140f95
+GET https://341Final.onrender.com/user/643e01b3d9fee2c621140f95
 
 ###
-GET https://cse341l02.onrender.com/user/643e01b3d9fee2c621140f96
+GET https://341Final.onrender.com/user/643e01b3d9fee2c621140f96
 
 ###
 
-POST http://localhost:8080/user/ HTTP/1.1
+POST https://three41final.onrender.com/game HTTP/1.1
 content-type: application/json
 
 {
-    "firstName": "24/7",
-    "lastName": "errors",
-    "email": "api@email.com",
-    "favoriteColor": "red",
-    "birthday": "06/22/02"
+    "gameTitle": "Chip's Challenge",
+    "releaseYear": "1989",
+    "language": "English",
+    "gameLength": "not long enough",
+    "rating": "pg",
+    "specialFeatures": "All of them",
+    "cost": "$14.79"
 }
 
 ###
@@ -44,11 +46,9 @@ PUT http://localhost:8080/user/644b4c8db1ec296b176140e6 HTTP/1.1
 content-type: application/json
 
 {
-    "firstName": "Richard",
-    "lastName": "pointif",
-    "email": "stopmockingme@email.com",
-    "favoriteColor": "white",
-    "birthday": "10/22/84"
+   "firstName": "Bilbo",
+    "lastName": "Baggins",
+    "gamesPlayed": "5"
 }
 
 ###
@@ -71,7 +71,7 @@ Content-Type:  application/json
 GET http://localhost:8080/game
 
 ###
-GET https://cse341l02.onrender.com/game
+GET https://341Final.onrender.com/game
 
 ###
 POST http://localhost:8080/game/ HTTP/1.1
@@ -122,7 +122,7 @@ Content-Type:  application/json
 GET http://localhost:8080/user
 
 ###
-GET https://cse341l02.onrender.com/user
+GET https://341Final.onrender.com/user
 
 ###
 POST http://localhost:8080/user/ HTTP/1.1
