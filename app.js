@@ -20,11 +20,9 @@ app
       saveUninitialized: true,
     })
   )
-  // This is the basic express session({..}) initialization.
+
   .use(passport.initialize())
-  // init passport on every route call.
   .use(passport.session())
-  // allow passport to use "express-session".
   .use((req, res, next) => {
     res.setHeader('Access-Controll-Allow-Origin', '*');
     res.setHeader(
@@ -49,9 +47,7 @@ passport.use(
       callbackURL: process.env.CALLBACK_URL,
     },
     function (accessToken, refreshToken, profile, done) {
-      //User.findOrCreate({ githubId: profile.id }, function (err, user) {
       return done(null, profile);
-      //});
     }
   )
 );
@@ -82,23 +78,6 @@ app.get(
     res.redirect('/');
   }
 );
-
-// app
-// .use(auth(config))
-// .use(bodyParser.json())
-// .use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept, Z-Key'
-//   );
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-//   next();
-// })
-// .use('/', require('./routes'));
-// process.on('uncaughtException', (err, origin) => {
-//   console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);
-// });
 
 mongodb.initDb((err, mongodb) => {
   if (err) {

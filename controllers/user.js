@@ -4,7 +4,7 @@ const ObjectId = require('mongodb').ObjectId;
 const { check, validationResult } = require('express-validator')
 
 const getAll = async (req, res, next) => {
-  const result = await mongodb.getDb().db('CSE341W02').collection('actors').find();
+  const result = await mongodb.getDb().db('CSE341W02').collection('user').find();
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
@@ -12,8 +12,8 @@ const getAll = async (req, res, next) => {
 };
 
 const getSingle = async (req, res, next) => {
-  const movieId = new ObjectId(req.params.id);
-  const result = await mongodb.getDb().db('CSE341W02').collection('actors').find({ _id: movieId });
+  const userid = new ObjectId(req.params.id);
+  const result = await mongodb.getDb().db('CSE341W02').collection('user').find({ _id: userid });
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists[0]);
@@ -27,14 +27,14 @@ const create = async (req, res, next) => {
   } else if (req.body.lastName == null){
     res.setHeader('Content-Type', 'application/json');
     res.status(400).json("lastName is a required field");
-  } else if (req.body.moviesIn == null){
+  } else if (req.body.gamesPlayed == null){
     res.setHeader('Content-Type', 'application/json');
-    res.status(400).json("moviesIn is a required field");
+    res.status(400).json("gamesPlayed is a required field");
   } else {
-    const result = await mongodb.getDb().db('CSE341W02').collection('actors').insertOne({
+    const result = await mongodb.getDb().db('CSE341W02').collection('user').insertOne({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      moviesIn: req.body.moviesIn
+      gamesPlayed: req.body.gamesPlayed
     });
 
     res.setHeader('Content-Type', 'application/json');
@@ -50,21 +50,21 @@ const modify = async (req, res, next) => {
     res.status(400).json({ errors: errors.array() });
     return
   }
-  let movieId = null
+  let userid = null
   try {
-    movieId = new ObjectId(req.params.id);
+    userid = new ObjectId(req.params.id);
   } catch {
     res.setHeader('Content-Type', 'application/json');
     res.status(400).json("This is not a valid ID format")
     return
   }
 
-  let firstName, lastName, moviesIn;
-  let result = await mongodb.getDb().db('CSE341W02').collection('actors').find({ _id: movieId }).toArray();
+  let firstName, lastName, gamesPlayed;
+  let result = await mongodb.getDb().db('CSE341W02').collection('user').find({ _id: userid }).toArray();
   // collection.find
   if (result.length == 0){
     res.setHeader('Content-Type', 'application/json');
-    res.status(400).json("There is no movie with that ID");
+    res.status(400).json("There is no user with that ID");
     return
   }
   result = result[0]
@@ -80,18 +80,18 @@ const modify = async (req, res, next) => {
   } else {
     lastName = req.body.lastName;
   }
-  if (req.body.moviesIn == null){
-    moviesIn = result.moviesIn;
+  if (req.body.gamesPlayed == null){
+    gamesPlayed = result.gamesPlayed;
 
   } else{
-    moviesIn = req.body.moviesIn
+    gamesPlayed = req.body.gamesPlayed
   }
 
-  result = await mongodb.getDb().db('CSE341W02').collection('actors').updateOne({_id: movieId},
+  result = await mongodb.getDb().db('CSE341W02').collection('user').updateOne({_id: userid},
   {
   $set: {firstName: firstName,
     lastName: lastName,
-    moviesIn: moviesIn
+    gamesPlayed: gamesPlayed
   },
     });
   res.setHeader('Content-Type', 'application/json');
@@ -99,11 +99,11 @@ const modify = async (req, res, next) => {
 }
 
 const deleteOne = async (req, res, next) => {
-  const movieId = new ObjectId(req.params.id);
-  const checkID = await mongodb.getDb().db('CSE341W02').collection('actors').find({ _id: movieId }).toArray();
+  const userid = new ObjectId(req.params.id);
+  const checkID = await mongodb.getDb().db('CSE341W02').collection('user').find({ _id: userid }).toArray();
   if(checkID.length > 0)
   {
-    const result = await mongodb.getDb().db('CSE341W02').collection('actors').deleteOne({_id: movieId});
+    const result = await mongodb.getDb().db('CSE341W02').collection('user').deleteOne({_id: userid});
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json("Documents deleted:" + result.deletedCount);
   };

@@ -4,15 +4,15 @@
 
 const validator = require('../helpers/validate');
 
-const saveContact = (req, res, next) => {
+const saveGame = (req, res, next) => {
   const validationRule = {
-    movieTitle: 'required|string',
+    gameTitle: 'required|string',
     releaseYear: 'required|integer',
     language: 'required|string',
-    movieLength: 'required|integer',
+    gameLength: 'required|string',
     rating: 'required|string',
     specialFeatures: 'required|string',
-    boxOfficeGross: 'required|string',
+    launchDayGross: 'required|string',
   };
   validator(req.body, validationRule, {}, (err, status) => {
     if (!status) {
@@ -28,5 +28,5 @@ const saveContact = (req, res, next) => {
 };
 
 module.exports = {
-  saveContact
+  saveGame
 };
