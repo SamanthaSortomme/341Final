@@ -12,7 +12,7 @@ const saveGame = (req, res, next) => {
     gameLength: 'required|string',
     rating: 'required|string',
     specialFeatures: 'required|string',
-    launchDayGross: 'required|string',
+    cost: 'required|string',
   };
   validator(req.body, validationRule, {}, (err, status) => {
     if (!status) {

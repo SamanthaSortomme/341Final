@@ -5,14 +5,34 @@
     "description": "Contact API",
     "version": "1.0.0"
   },
-  "host": "cse341l03.onrender.com",
+  "host": "341Final.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
   ],
   "paths": {
-
-    "/movies/": {
+    "/login": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/logout": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api-docs": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/game/": {
       "get": {
         "description": "",
         "produces": [
@@ -37,7 +57,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "movieTitle": {
+                "gameTitle": {
                   "example": "any"
                 },
                 "releaseYear": {
@@ -46,7 +66,7 @@
                 "language": {
                   "example": "any"
                 },
-                "movieLength": {
+                "gameLength": {
                   "example": "any"
                 },
                 "rating": {
@@ -55,7 +75,7 @@
                 "specialFeatures": {
                   "example": "any"
                 },
-                "boxOfficeGross": {
+                "cost": {
                   "example": "any"
                 }
               }
@@ -78,7 +98,7 @@
         }
       }
     },
-    "/movies/{id}": {
+    "/game/{id}": {
       "get": {
         "description": "",
         "produces": [
@@ -116,7 +136,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "movieTitle": {
+                "gameTitle": {
                   "example": "any"
                 },
                 "releaseYear": {
@@ -125,7 +145,7 @@
                 "language": {
                   "example": "any"
                 },
-                "movieLength": {
+                "gameLength": {
                   "example": "any"
                 },
                 "rating": {
@@ -134,7 +154,7 @@
                 "specialFeatures": {
                   "example": "any"
                 },
-                "boxOfficeGross": {
+                "cost": {
                   "example": "any"
                 }
               }
@@ -179,7 +199,7 @@
         }
       }
     },
-    "/actors/": {
+    "/user/": {
       "get": {
         "description": "",
         "produces": [
@@ -210,7 +230,7 @@
                 "lastName": {
                   "example": "any"
                 },
-                "moviesIn": {
+                "gamesPlayed": {
                   "example": "any"
                 }
               }
@@ -230,7 +250,7 @@
         }
       }
     },
-    "/actors/{id}": {
+    "/user/{id}": {
       "put": {
         "description": "",
         "produces": [
@@ -255,7 +275,7 @@
                 "lastName": {
                   "example": "any"
                 },
-                "moviesIn": {
+                "gamesPlayed": {
                   "example": "any"
                 }
               }

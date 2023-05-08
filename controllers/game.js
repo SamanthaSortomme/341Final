@@ -46,9 +46,9 @@ const create = async (req, res, next) => {
   } else if (req.body.specialFeatures == null) {
     res.setHeader('Content-Type', 'application/json');
     res.status(400).json('specialFeatures is a required field');
-  } else if (req.body.launchDayGross == null) {
+  } else if (req.body.cost == null) {
     res.setHeader('Content-Type', 'application/json');
-    res.status(400).json('launchDayGross is a required field');
+    res.status(400).json('cost is a required field');
   } else {
     const result = await mongodb
       .getDb()
@@ -61,7 +61,7 @@ const create = async (req, res, next) => {
         gameLength: req.body.gameLength,
         rating: req.body.rating,
         specialFeatures: req.body.specialFeatures,
-        launchDayGross: req.body.launchDayGross,
+        cost: req.body.cost,
       });
 
     res.setHeader('Content-Type', 'application/json');
@@ -128,10 +128,10 @@ const modify = async (req, res, next) => {
   } else {
     sFeat = req.body.specialFeatures;
   }
-  if (req.body.launchDayGross == null) {
-    gross = result.launchDayGross;
+  if (req.body.cost == null) {
+    gross = result.cost;
   } else {
-    gross = req.body.launchDayGross;
+    gross = req.body.cost;
   }
   result = await mongodb
     .getDb()
@@ -147,7 +147,7 @@ const modify = async (req, res, next) => {
           gameLength: length,
           rating: rat,
           specialFeatures: sFeat,
-          launchDayGross: gross,
+          cost: gross,
         },
       }
     );

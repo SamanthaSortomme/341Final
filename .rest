@@ -2,33 +2,33 @@
 //This is how users use your API You have to click button to make things happen
 
 
-GET http://localhost:8080/contacts
+GET http://localhost:8080/user
 
 ###
-GET http://localhost:8080/contacts/643e01b3d9fee2c621140f94
+GET http://localhost:8080/user/643e01b3d9fee2c621140f94
 
 ###
-GET http://localhost:8080/contacts/643e01b3d9fee2c621140f95
+GET http://localhost:8080/user/643e01b3d9fee2c621140f95
 
 ###
-GET http://localhost:8080/contacts/643e01b3d9fee2c621140f96
-
-###
-
-GET https://cse341l02.onrender.com/contacts
-
-###
-GET https://cse341l02.onrender.com/contacts/643e01b3d9fee2c621140f94
-
-###
-GET https://cse341l02.onrender.com/contacts/643e01b3d9fee2c621140f95
-
-###
-GET https://cse341l02.onrender.com/contacts/643e01b3d9fee2c621140f96
+GET http://localhost:8080/user/643e01b3d9fee2c621140f96
 
 ###
 
-POST http://localhost:8080/contacts/ HTTP/1.1
+GET https://cse341l02.onrender.com/user
+
+###
+GET https://cse341l02.onrender.com/user/643e01b3d9fee2c621140f94
+
+###
+GET https://cse341l02.onrender.com/user/643e01b3d9fee2c621140f95
+
+###
+GET https://cse341l02.onrender.com/user/643e01b3d9fee2c621140f96
+
+###
+
+POST http://localhost:8080/user/ HTTP/1.1
 content-type: application/json
 
 {
@@ -40,7 +40,7 @@ content-type: application/json
 }
 
 ###
-PUT http://localhost:8080/contacts/644b4c8db1ec296b176140e6 HTTP/1.1
+PUT http://localhost:8080/user/644b4c8db1ec296b176140e6 HTTP/1.1
 content-type: application/json
 
 {
@@ -52,7 +52,7 @@ content-type: application/json
 }
 
 ###
-DELETE http://localhost:8080/contacts/6447e335079e8dcdef8a46f5 HTTP/1.1
+DELETE http://localhost:8080/user/6447e335079e8dcdef8a46f5 HTTP/1.1
 Content-Type:  application/json
 
 
@@ -68,42 +68,42 @@ Content-Type:  application/json
 
 
 ###
-GET http://localhost:8080/movies
+GET http://localhost:8080/game
 
 ###
-GET https://cse341l02.onrender.com/movies
+GET https://cse341l02.onrender.com/game
 
 ###
-POST http://localhost:8080/movies/ HTTP/1.1
+POST http://localhost:8080/game/ HTTP/1.1
 content-type: application/json
 
 {
 
-    "movieTitle": "LotR",
-    "releaseYear": "2050",
-    "language": "Elvish",
-    "movieLength": "258",
+    "gameTitle": "Chip's Challenge",
+    "releaseYear": "1989",
+    "language": "English",
+    "gameLength": "not long enough",
     "rating": "pg",
     "specialFeatures": "All of them",
-    "boxOfficeGross": "50 Billion"
+    "cost": "$14.79"
 }
 
 ###
-PUT http://localhost:8080/movies/644d5075c984b6046b3eb54f HTTP/1.1
+PUT http://localhost:8080/game/644d5075c984b6046b3eb54f HTTP/1.1
 content-type: application/json
 
 {
-    "movieTitle": "errorCheck",
-    "releaseYear": "ffff",
-    "language": "Elvish",
-    "movieLength": "258",
+    "gameTitle": "The Oregon Trail",
+    "releaseYear": "1971 ",
+    "language": "English",
+    "gameLength": "5.5 hours",
     "rating": "pg",
-    "specialFeatures": "All of them",
-    "boxOfficeGross": "50 Billion"
+    "specialFeatures": "Includes cattle dieing and family members freezing!",
+    "cost": "$7.26"
 }
 
 ###
-DELETE http://localhost:8080/movies/644d9e0e602805f0926e48e3 HTTP/1.1
+DELETE http://localhost:8080/game/644d9e0e602805f0926e48e3 HTTP/1.1
 Content-Type:  application/json
 
 
@@ -119,33 +119,33 @@ Content-Type:  application/json
 
 
 ###
-GET http://localhost:8080/actors
+GET http://localhost:8080/user
 
 ###
-GET https://cse341l02.onrender.com/actors
+GET https://cse341l02.onrender.com/user
 
 ###
-POST http://localhost:8080/actors/ HTTP/1.1
+POST http://localhost:8080/user/ HTTP/1.1
 content-type: application/json
 
 {
 
     "firstName": "Bilbo",
     "lastName": "Baggins",
-    "moviesIn": "5"
+    "gamesPlayed": "5"
 
 }
 
 ###
-PUT http://localhost:8080/actors/644d5075c984b6046b3eb54f HTTP/1.1
+PUT http://localhost:8080/user/644d5075c984b6046b3eb54f HTTP/1.1
 content-type: application/json
 
 {
     "firstName": "Frodo",
     "lastName": "Baggins",
-    "moviesIn": "3"
+    "gamesPlayed": "3"
 }
 
 ###
-DELETE http://localhost:8080/actors/6450620204b037e75e11e0dc HTTP/1.1
+DELETE http://localhost:8080/user/6450620204b037e75e11e0dc HTTP/1.1
 Content-Type:  application/json
