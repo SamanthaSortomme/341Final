@@ -4,37 +4,8 @@
 
 GET http://localhost:8080/user
 
-
 ###
-GET https://three41final.onrender.com/user
-
-###
-POST https://three41final.onrender.com/game HTTP/1.1
-content-type: application/json
-
-{
-    "gameTitle": "Chip's Challenge",
-    "releaseYear": "1989",
-    "language": "English",
-    "gameLength": "not long enough",
-    "rating": "pg",
-    "specialFeatures": "All of them",
-    "cost": "$14.79"
-}
-
-###
-PUT http://localhost:8080/user/644b4c8db1ec296b176140e6 HTTP/1.1
-content-type: application/json
-
-{
-   "firstName": "Bilbo",
-    "lastName": "Baggins",
-    "gamesPlayed": "5"
-}
-
-###
-DELETE http://localhost:8080/user/6447e335079e8dcdef8a46f5 HTTP/1.1
-Content-Type:  application/json
+GET http://localhost:8080/game
 
 //================================================================
 ###
@@ -59,16 +30,16 @@ content-type: application/json
 }
 
 ###
-PUT http://localhost:8080/game/644d5075c984b6046b3eb54f HTTP/1.1
+PUT http://localhost:8080/game/64596f8ff00d9cb76d53421a HTTP/1.1
 content-type: application/json
 
 {
     "gameTitle": "The Oregon Trail",
-    "releaseYear": "1971 ",
+    "releaseYear": "1971",
     "language": "English",
     "gameLength": "5.5 hours",
     "rating": "pg",
-    "specialFeatures": "Includes cattle dieing and family members freezing!",
+    "specialFeatures": "Includes cattle dieing and family members freezing",
     "cost": "$7.26"
 }
 
@@ -76,18 +47,7 @@ content-type: application/json
 DELETE http://localhost:8080/game/644d9e0e602805f0926e48e3 HTTP/1.1
 Content-Type:  application/json
 
-
-
-
-
-
-
-
-
-
-
-
-
+//==========================================
 ###
 GET http://localhost:8080/user
 
@@ -107,7 +67,7 @@ content-type: application/json
 }
 
 ###
-PUT http://localhost:8080/user/644d5075c984b6046b3eb54f HTTP/1.1
+PUT http://localhost:8080/user/64597015f00d9cb76d53421c HTTP/1.1
 content-type: application/json
 
 {
