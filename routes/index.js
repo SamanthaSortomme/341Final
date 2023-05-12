@@ -19,3 +19,8 @@ router.use('/user', require('./user'));
 router.use('/profile', require('./profile'));
 
 module.exports = router;
+
+
+//data validation for put and post
+// error handling in controllers folder with try catches
+// tests on logout tests don't have anything to do with database or 3rd party

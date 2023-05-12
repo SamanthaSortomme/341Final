@@ -4,16 +4,18 @@ const MongoClient = require('mongodb').MongoClient;
 
 let _db;
 
-const initDb = (callback) => {
+
+const initDb = async (callback) => {
   if (_db) {
     console.log('Db is already initialized!');
-    return callback(null, _db);
+    callback(null, _db);
+    return;
   }
   console.log("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV")
   console.log(process.env.MONGO_URI)
   console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 
-  MongoClient.connect(process.env.MONGO_URI)
+  await MongoClient.connect(process.env.MONGO_URI)
     .then((client) => {
       _db = client;
       callback(null, _db);
@@ -23,8 +25,10 @@ const initDb = (callback) => {
     });
 };
 
-const getDb = () => {
+const getDb =  () => {
   if (!_db) {
+    console.log('is this happening first?~~~~~~~~~~~~~~~~~~~~~')
+
     throw Error('Db not initialized');
   }
   return _db;
