@@ -80,19 +80,9 @@ app.get(
 );
 
 (async () => {
-  try {
-    await mongodb.initDb((err, mongodb) => {
-      if (err) {
-        console.log(err);
-      } else {
-        app.listen(port);
-        console.log(`Connected to DB and listening on ${port}`);
-      }
-    });
-  } catch (e) {
-  }
+  await mongodb.getDb();
+  app.listen(port);
+  console.log(`Connected to DB and listening on ${port}`);
 })();
-
-
 
 module.exports = app;

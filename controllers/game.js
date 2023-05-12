@@ -4,7 +4,8 @@ const ObjectId = require('mongodb').ObjectId;
 const { check, validationResult } = require('express-validator');
 
 const getAll = async (req, res, next) => {
-  const result = await mongodb.getDb().db('341Final').collection('game').find();
+  const db = await mongodb.getDb()
+  const result = await db.db('341Final').collection('game').find();
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);

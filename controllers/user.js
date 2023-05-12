@@ -4,7 +4,10 @@ const ObjectId = require('mongodb').ObjectId;
 const { check, validationResult } = require('express-validator')
 
 const getAll = async (req, res, next) => {
-  const result = await mongodb.getDb().db('341Final').collection('user').find();
+  const db = await mongodb.getDb()
+  const result = await db.db('341Final').collection('user').find();
+  // this does same thing
+  // const result = await (await mongodb.getDb()).db('341Final').collection('user').find();
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
@@ -31,7 +34,8 @@ const create = async (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(400).json("gamesPlayed is a required field");
   } else {
-    const result = await mongodb.getDb().db('341Final').collection('user').insertOne({
+    const db = await mongodb.getDb()
+    const result = await db.db('341Final').collection('user').insertOne({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       gamesPlayed: req.body.gamesPlayed

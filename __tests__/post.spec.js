@@ -4,8 +4,6 @@ const { expect } = require('@jest/globals');
 const request = supertest(app)
 
 
-
-//not reading env? 
 describe('Test Handlers', () => {
     test('responds to post /user', async () => {
         const res = await request.post('/user').send({
@@ -13,11 +11,23 @@ describe('Test Handlers', () => {
             lastName: "Baggins",
             gamesPlayed: "5"
         });
-        expect(res.header['content-type']).toBe('application/json; charset=utf-8');
         expect(res.statusCode).toBe(201)
+        expect(res.header['content-type']).toBe('application/json; charset=utf-8');
+
+    })
+    test('responds to get /user', async () => {
+        const res = await request.get('/user')
+        expect(res.statusCode).toBe(200)
+        expect(res.header['content-type']).toBe('application/json; charset=utf-8');
+
+    })
+    test('responds to get /user', async () => {
+        const res = await request.get('/user/64597015f00d9cb76d53421c')
+        expect(res.statusCode).toBe(200)
+        expect(res.header['content-type']).toBe('application/json; charset=utf-8');
+
     })
 })
-
 
 
 
