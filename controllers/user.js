@@ -41,7 +41,7 @@ const create = async (req, res, next) => {
     const result = await db.db('341Final').collection('user').insertOne({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      gamesPlayed: req.body.gamesPlayed
+      gamesPlayed: req.body.gamesPlayed,
     });
 
     res.setHeader('Content-Type', 'application/json');

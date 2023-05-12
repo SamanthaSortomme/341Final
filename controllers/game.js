@@ -14,11 +14,8 @@ const getAll = async (req, res, next) => {
 
 const getSingle = async (req, res, next) => {
   const gameid = new ObjectId(req.params.id);
-  const result = await mongodb
-    .getDb()
-    .db('341Final')
-    .collection('game')
-    .find({ _id: gameid });
+  const db = await mongodb.getDb()
+  const result = await db.db('341Final').collection('game').find({ _id: gameid });
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists[0]);
@@ -51,11 +48,8 @@ const create = async (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(400).json('cost is a required field');
   } else {
-    const result = await mongodb
-      .getDb()
-      .db('341Final')
-      .collection('game')
-      .insertOne({
+    const db = await mongodb.getDb()
+    const result = await db.db('341Final').collection('game').insertOne({
         gameTitle: req.body.gameTitle,
         releaseYear: req.body.releaseYear,
         language: req.body.language,
@@ -87,12 +81,8 @@ const modify = async (req, res, next) => {
   }
 
   let title, year, language, length, rat;
-  let result = await mongodb
-    .getDb()
-    .db('341Final')
-    .collection('game')
-    .find({ _id: gameid })
-    .toArray();
+  const db = await mongodb.getDb();
+  result = await db.db('341Final').collection('game').find({ _id: gameid }).toArray();
   if (result.length == 0) {
     res.setHeader('Content-Type', 'application/json');
     res.status(400).json('There is no game with that ID');
@@ -134,12 +124,7 @@ const modify = async (req, res, next) => {
   } else {
     gross = req.body.cost;
   }
-  result = await mongodb
-    .getDb()
-    .db('341Final')
-    .collection('game')
-    .updateOne(
-      { _id: gameid },
+  result = await db.db('341Final').collection('game').updateOne({_id: gameid},
       {
         $set: {
           gameTitle: title,
@@ -158,21 +143,14 @@ const modify = async (req, res, next) => {
 
 const deleteOne = async (req, res, next) => {
   const gameid = new ObjectId(req.params.id);
-  const checkID = await mongodb
-    .getDb()
-    .db('341Final')
-    .collection('game')
-    .find({ _id: gameid })
-    .toArray();
-  if (checkID.length > 0) {
-    const result = await mongodb
-      .getDb()
-      .db('341Final')
-      .collection('game')
-      .deleteOne({ _id: gameid });
+  const db = await mongodb.getDb();
+  const checkID = await db.db('341Final').collection('game').find({ _id: gameid }).toArray();
+  if(checkID.length > 0)
+  {
+    const result = await db.db('341Final').collection('game').deleteOne({_id: gameid});
     res.setHeader('Content-Type', 'application/json');
-    res.status(200).json('Documents deleted:' + result.deletedCount);
-  }
+    res.status(200).json("Documents deleted:" + result.deletedCount);
+  };
 };
 
 module.exports = { getAll, getSingle, create, modify, deleteOne };

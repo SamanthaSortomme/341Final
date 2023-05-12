@@ -6,8 +6,8 @@ const { isAuthenticated } = require('../middleware/authenticate');
 router.get('/', userController.getAll);
 router.get('/:id', userController.getSingle);
 
-router.post('/', userController.create);
-// router.post('/', isAuthenticated, userController.create);
+// router.post('/', userController.create);
+router.post('/', isAuthenticated, userController.create);
 
 router.put('/:id', userController.modify);
 // router.put('/:id', isAuthenticated, userController.modify);
