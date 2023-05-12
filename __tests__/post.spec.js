@@ -22,11 +22,22 @@ describe('Test Handlers', () => {
 
     })
     test('responds to get /user', async () => {
-        const res = await request.get('/user/64597015f00d9cb76d53421c')
+        const res = await request.get('/user/645dab77d10178e68110fc48')
         expect(res.statusCode).toBe(200)
         expect(res.header['content-type']).toBe('application/json; charset=utf-8');
 
     })
+    // test('responds to post /user', async () => {
+    //     const res = await request.put('/user/645dab77d10178e68110fc48').send({
+    //         firstName: "update",
+    //         lastName: "here",
+    //         gamesPlayed: "22"
+    //     });
+    //     expect(res.statusCode).toBe(204)
+    //     expect(res.header['content-type']).toBe('application/json; charset=utf-8');
+
+    // })
+
 })
 
 

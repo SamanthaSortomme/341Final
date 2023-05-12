@@ -16,12 +16,15 @@ const getAll = async (req, res, next) => {
 
 const getSingle = async (req, res, next) => {
   const userid = new ObjectId(req.params.id);
-  const result = await mongodb.getDb().db('341Final').collection('user').find({ _id: userid });
+  const db = await mongodb.getDb()
+  const result = await db.db('341Final').collection('user').find({ _id: userid });
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists[0]);
   });
 };
+
+
 
 const create = async (req, res, next) => {
   if (req.body.firstName == null){
@@ -47,7 +50,6 @@ const create = async (req, res, next) => {
 }
 
 const modify = async (req, res, next) => {
-
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     res.setHeader('Content-Type', 'application/json');
@@ -62,9 +64,10 @@ const modify = async (req, res, next) => {
     res.status(400).json("This is not a valid ID format")
     return
   }
-
   let firstName, lastName, gamesPlayed;
-  let result = await mongodb.getDb().db('341Final').collection('user').find({ _id: userid }).toArray();
+  const db = await mongodb.getDb();
+  result = await db.db('341Final').collection('user').find({ _id: userid }).toArray();
+  // let result = await mongodb.getDb().db('341Final').collection('user').find({ _id: userid }).toArray();
   // collection.find
   if (result.length == 0){
     res.setHeader('Content-Type', 'application/json');
@@ -90,8 +93,8 @@ const modify = async (req, res, next) => {
   } else{
     gamesPlayed = req.body.gamesPlayed
   }
-
-  result = await mongodb.getDb().db('341Final').collection('user').updateOne({_id: userid},
+  result = await db.db('341Final').collection('user').updateOne({_id: userid},
+  // result = await mongodb.getDb().db('341Final').collection('user').updateOne({_id: userid},
   {
   $set: {firstName: firstName,
     lastName: lastName,
@@ -99,6 +102,7 @@ const modify = async (req, res, next) => {
   },
     });
   res.setHeader('Content-Type', 'application/json');
+  // res.status(204).setHeader('Content-Type', 'application/json').json("Documents modified:" + result.modifiedCount);
   res.status(204).json("Documents modified:" + result.modifiedCount);
 }
 
