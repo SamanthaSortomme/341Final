@@ -21,22 +21,25 @@ describe('Test Handlers', () => {
         expect(res.header['content-type']).toBe('application/json; charset=utf-8');
 
     })
-    test('responds to get /user', async () => {
+    test('responds to get /user by id', async () => {
         const res = await request.get('/user/645dab77d10178e68110fc48')
         expect(res.statusCode).toBe(200)
         expect(res.header['content-type']).toBe('application/json; charset=utf-8');
 
     })
-    // test('responds to post /user', async () => {
-    //     const res = await request.put('/user/645dab77d10178e68110fc48').send({
-    //         firstName: "update",
-    //         lastName: "here",
-    //         gamesPlayed: "22"
-    //     });
-    //     expect(res.statusCode).toBe(204)
-    //     expect(res.header['content-type']).toBe('application/json; charset=utf-8');
-
-    // })
+    test('responds to put /user', async () => {
+        const res = await request.put('/user/645db2055067a3b419708987').send({
+            firstName: "update",
+            lastName: "here",
+            gamesPlayed: "22"
+        });
+        expect(res.statusCode).toBe(204);
+        //does not return value
+    })
+    test('responds to delete /user by id', async () => {
+        const res = await request.delete('/user/645e9a8ea0455f9a2a06e8cd');
+        expect(res.statusCode).toBe(200);
+    })
 
 })
 

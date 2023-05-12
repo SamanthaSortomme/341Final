@@ -108,10 +108,11 @@ const modify = async (req, res, next) => {
 
 const deleteOne = async (req, res, next) => {
   const userid = new ObjectId(req.params.id);
-  const checkID = await mongodb.getDb().db('341Final').collection('user').find({ _id: userid }).toArray();
+  const db = await mongodb.getDb();
+  const checkID = await db.db('341Final').collection('user').find({ _id: userid }).toArray();
   if(checkID.length > 0)
   {
-    const result = await mongodb.getDb().db('341Final').collection('user').deleteOne({_id: userid});
+    const result = await db.db('341Final').collection('user').deleteOne({_id: userid});
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json("Documents deleted:" + result.deletedCount);
   };
