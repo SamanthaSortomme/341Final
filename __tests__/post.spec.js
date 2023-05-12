@@ -29,16 +29,17 @@ describe('Test Handlers', () => {
     })
     test('responds to put /user', async () => {
         const res = await request.put('/user/645db2055067a3b419708987').send({
-            firstName: "update",
-            lastName: "here",
-            gamesPlayed: "22"
+            firstName: "update take 2",
+            lastName: "2",
+            gamesPlayed: "2"
         });
         expect(res.statusCode).toBe(204);
         //does not return value
     })
     test('responds to delete /user by id', async () => {
-        const res = await request.delete('/user/645e9a8ea0455f9a2a06e8cd');
-        expect(res.statusCode).toBe(200);
+        const res = await request.delete('/user/645ea0cc9d45184468e9261a');
+        expect(res.statusCode).toBe(200)
+        expect(res.header['content-type']).toBe('application/json; charset=utf-8');
     })
 
 })
