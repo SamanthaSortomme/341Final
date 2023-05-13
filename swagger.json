@@ -34,19 +34,27 @@
     },
     "/game/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Game"
+        ],
+        "summary": "Get all games",
+        "description": "Get all the games",
         "produces": [
           "application/json"
         ],
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Games found"
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Game"
+        ],
+        "summary": "Create a game",
+        "description": "Create a game",
         "produces": [
           "application/json"
         ],
@@ -83,6 +91,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Game  "
+          },
           "201": {
             "description": "Created"
           },
@@ -97,7 +108,11 @@
     },
     "/game/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Game"
+        ],
+        "summary": "Get a game",
+        "description": "Enter an id to find an existing game",
         "produces": [
           "application/json"
         ],
@@ -111,12 +126,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Game found"
           }
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Game"
+        ],
+        "summary": "Update a game",
+        "description": "Enter an id to update an existing game",
         "produces": [
           "application/json"
         ],
@@ -160,7 +179,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Game updated"
           },
           "400": {
             "description": "Bad Request"
@@ -171,7 +190,11 @@
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Game"
+        ],
+        "summary": "Delete a game",
+        "description": "Enter an id to delete an existing game",
         "produces": [
           "application/json"
         ],
@@ -185,26 +208,34 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Game deleted"
           }
         }
       }
     },
     "/user/": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "Get all users",
+        "description": "Get all the users",
         "produces": [
           "application/json"
         ],
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "All users found"
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "Create a user",
+        "description": "Create a new user",
         "produces": [
           "application/json"
         ],
@@ -230,7 +261,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "User  "
           },
           "400": {
             "description": "Bad Request"
@@ -243,7 +274,11 @@
     },
     "/user/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "Get a user by id",
+        "description": "Enter an id to find a specific user",
         "produces": [
           "application/json"
         ],
@@ -257,12 +292,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "User found"
           }
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "Update a user",
+        "description": "Enter an id to update an existing user",
         "produces": [
           "application/json"
         ],
@@ -294,7 +333,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "User updated"
           },
           "400": {
             "description": "Bad Request"
@@ -302,7 +341,11 @@
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete a user",
+        "description": "Enter an id to delete a user",
         "produces": [
           "application/json"
         ],
@@ -316,7 +359,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "User deleted"
           }
         }
       }
