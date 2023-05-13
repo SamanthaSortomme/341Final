@@ -1,5 +1,3 @@
-
-
 //Don't think I need this file, did if else. Have just in case
 
 const validator = require('../helpers/validate');
