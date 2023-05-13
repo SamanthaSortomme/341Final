@@ -5,10 +5,10 @@
     "description": "Contact API",
     "version": "1.0.0"
   },
-  "host": "three41final.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/login": {
@@ -323,19 +323,30 @@
     },
     "/platform/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Platform"
+        ],
+        "summary": "Get all platforms",
+        "description": "Get all the platforms",
         "produces": [
           "application/json"
         ],
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "All platforms found"
+          },
+          "500": {
+            "description": "Internal Service Error"
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Platform"
+        ],
+        "summary": "Create a platform",
+        "description": "Create a platform",
         "produces": [
           "application/json"
         ],
@@ -361,17 +372,24 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Platform  "
           },
-          "400": {
-            "description": "Bad Request"
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Service Error"
           }
         }
       }
     },
     "/platform/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Platform"
+        ],
+        "summary": "Get platform by id",
+        "description": "Get a single platform by id",
         "produces": [
           "application/json"
         ],
@@ -385,15 +403,22 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Platform found"
+          },
+          "404": {
+            "description": "Platform not found"
+          },
+          "500": {
+            "description": "Internal Service Error"
           }
         }
       },
       "put": {
-        "description": "",
-        "produces": [
-          "application/json"
+        "tags": [
+          "Platform"
         ],
+        "summary": "Update a platform",
+        "description": "Update a platform by id",
         "parameters": [
           {
             "name": "id",
@@ -422,15 +447,25 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Platform updated"
           },
-          "400": {
-            "description": "Bad Request"
+          "404": {
+            "description": "Platform not found"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Service Error"
           }
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Platform"
+        ],
+        "summary": "Delete a platform",
+        "description": "Delete a platform by id",
         "produces": [
           "application/json"
         ],
@@ -444,7 +479,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Platform deleted"
+          },
+          "404": {
+            "description": "Platform not found"
+          },
+          "500": {
+            "description": "Internal Service Error"
           }
         }
       }

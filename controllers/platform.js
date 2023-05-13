@@ -1,121 +1,148 @@
-
-const mongodb = require('../db/connect');
-const ObjectId = require('mongodb').ObjectId;
-const { check, validationResult } = require('express-validator')
+const mongodb = require("../db/connect")
+const ObjectId = require("mongodb").ObjectId
+const { check, validationResult } = require("express-validator")
 
 const getAll = async (req, res, next) => {
-  const db = await mongodb.getDb()
-  const result = await db.db('341Final').collection('platform').find();
-  // this does same thing
-  // const result = await (await mongodb.getDb()).db('341Final').collection('platform').find();
-  result.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists);
-  });
-};
+  //#swagger.tags=['Platform']
+  //#swagger.summary=Get all platforms
+  //#swagger.description=Get all the platforms
+  try {
+    const db = await mongodb.getDb()
+    const result = await db.db("341Final").collection("platform").find()
+    // this does same thing
+    // const result = await (await mongodb.getDb()).db('341Final').collection('platform').find();
+    result.toArray().then((lists) => {
+      res.setHeader("Content-Type", "application/json")
+      // #swagger.responses[200]={description: "All platforms found" }
+      res.status(200).json(lists)
+    })
+  } catch (err) {
+    // #swagger.responses[500]={description: "Internal Service Error" }
+    res.status(500).json(err)
+  }
+}
 
 const getSingle = async (req, res, next) => {
-  const platformid = new ObjectId(req.params.id);
-  const db = await mongodb.getDb()
-  const result = await db.db('341Final').collection('platform').find({ _id: platformid });
-  result.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists[0]);
-  });
-};
+  //#swagger.tags=['Platform']
+  //#swagger.summary=Get platform by id
+  //#swagger.description=Get a single platform by id
+  try {
+    const platformid = new ObjectId(req.params.id)
+    const db = await mongodb.getDb()
+    const result = await db
+      .db("341Final")
+      .collection("platform")
+      .find({ _id: platformid })
+      .toArray()
 
+    if (result.length === 0) {
+      // #swagger.responses[404]={description: "Platform not found" }
+      res.status(404).send("Error - platform not found")
+      return
+    }
 
+    res.setHeader("Content-Type", "application/json")
+    // #swagger.responses[200]={description: "Platform found" }
+    res.status(200).json(result[0])
+  } catch (err) {
+    // #swagger.responses[500]={description: "Internal Service Error" }
+    res.status(500).json(err)
+  }
+}
 
 const create = async (req, res, next) => {
-  if (req.body.platformName == null){
-    res.setHeader('Content-Type', 'application/json');
-    res.status(400).json("platformName is a required field");
-  } else if (req.body.companyName == null){
-    res.setHeader('Content-Type', 'application/json');
-    res.status(400).json("companyName is a required field");
-  } else if (req.body.price == null){
-    res.setHeader('Content-Type', 'application/json');
-    res.status(400).json("price is a required field");
-  } else {
+  //#swagger.tags=['Platform']
+  //#swagger.summary=Create a platform
+  //#swagger.description=Create a platform
+
+  try {
     const db = await mongodb.getDb()
-    const result = await db.db('341Final').collection('platform').insertOne({
+    const result = await db.db("341Final").collection("platform").insertOne({
       platformName: req.body.platformName,
       companyName: req.body.companyName,
       price: req.body.price,
-    });
+    })
 
-    res.setHeader('Content-Type', 'application/json');
-    res.status(201).json({id: result.insertedId});
+    res.setHeader("Content-Type", "application/json")
+    // #swagger.responses[201]={description: "Platform created" }
+    res.status(201).json({ id: result.insertedId })
+  } catch (err) {
+    // #swagger.responses[500]={description: "Internal Service Error" }
+    res.status(500).json(err)
   }
 }
 
-const modify = async (req, res, next) => {
-  const errors = validationResult(req)
-  if (!errors.isEmpty()) {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(400).json({ errors: errors.array() });
-    return
-  }
-  let platformid = null
+const modify = async (req, res) => {
+  //   //#swagger.tags=['Platform']
+  //   //#swagger.summary=Update a platform
+  //   //#swagger.description=Update a platform by id
+
   try {
-    platformid = new ObjectId(req.params.id);
-  } catch {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(400).json("This is not a valid ID format")
-    return
-  }
-  let platformName, companyName, price;
-  const db = await mongodb.getDb();
-  result = await db.db('341Final').collection('platform').find({ _id: platformid }).toArray();
-  // let result = await mongodb.getDb().db('341Final').collection('platform').find({ _id: platformid }).toArray();
-  // collection.find
-  if (result.length == 0){
-    res.setHeader('Content-Type', 'application/json');
-    res.status(400).json("There is no platform with that ID");
-    return
-  }
-  result = result[0]
-  if (req.body.platformName == null){
-    platformName = result.platformName;
+    const platformid = new ObjectId(req.params.id)
 
-  } else {
-    platformName = req.body.platformName;
-  }
-  if (req.body.companyName == null){
-    companyName = result.companyName;
+    let platform = {
+      platformName: req.body.platformName,
+      companyName: req.body.companyName,
+      price: req.body.price,
+    }
+    const db = await mongodb.getDb()
+    result = await db
+      .db("341Final")
+      .collection("platform")
+      .find({ _id: platformid })
+      .toArray()
 
-  } else {
-    companyName = req.body.companyName;
+    if (result.length === 0) {
+      // #swagger.responses[404]={description: "Platform not found" }
+      res.status(404).send("Error - platform id not found")
+      return
+    } else {
+      const result = await db
+        .db("341Final")
+        .collection("platform")
+        .replaceOne({ _id: platformid }, platform)
+      if (result.modifiedCount > 0) {
+        // #swagger.responses[204]={description: "Platform updated" }
+        res.status(204).send("Platform updated")
+      }
+    }
+  } catch (err) {
+    // #swagger.responses[500]={description: "Internal Service Error" }
+    res.status(500).json(err)
   }
-  if (req.body.price == null){
-    price = result.price;
-
-  } else{
-    price = req.body.price
-  }
-  result = await db.db('341Final').collection('platform').updateOne({_id: platformid},
-  // result = await mongodb.getDb().db('341Final').collection('platform').updateOne({_id: platformid},
-  {
-  $set: {platformName: platformName,
-    companyName: companyName,
-    price: price
-  },
-    });
-  res.setHeader('Content-Type', 'application/json');
-  // res.status(204).setHeader('Content-Type', 'application/json').json("Documents modified:" + result.modifiedCount);
-  res.status(204).json("Documents modified:" + result.modifiedCount);
 }
+
 
 const deleteOne = async (req, res, next) => {
-  const platformid = new ObjectId(req.params.id);
-  const db = await mongodb.getDb();
-  const checkID = await db.db('341Final').collection('platform').find({ _id: platformid }).toArray();
-  if(checkID.length > 0)
-  {
-    const result = await db.db('341Final').collection('platform').deleteOne({_id: platformid});
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json("Documents deleted:" + result.deletedCount);
-  };
+  //#swagger.tags=['Platform']
+  //#swagger.summary=Delete a platform
+  //#swagger.description=Delete a platform by id
+  try {
+    const platformid = new ObjectId(req.params.id)
+    const db = await mongodb.getDb()
+    const checkID = await db
+      .db("341Final")
+      .collection("platform")
+      .find({ _id: platformid })
+      .toArray()
+    if (checkID.length > 0) {
+      const result = await db
+        .db("341Final")
+        .collection("platform")
+        .deleteOne({ _id: platformid })
+      res.setHeader("Content-Type", "application/json")
+      // #swagger.responses[200]={description: "Platform deleted" }
+      res.status(200).json("Documents deleted:" + result.deletedCount)
+    } else {
+      // #swagger.responses[404]={description: "Platform not found" }
+      res.status(404).send("Error - platform not found")
+      return
+    }
+  } catch (err) {
+    // #swagger.responses[500]={description: "Internal Service Error" }
+    res.status(500).json(err)
+  }
 }
 
-module.exports = { getAll, getSingle, create, modify, deleteOne};
+module.exports = { getAll, getSingle, create, modify, deleteOne }
+

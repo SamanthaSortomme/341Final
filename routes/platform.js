@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const platformController = require('../controllers/platform');
-// const { isAuthenticated } = require('../middleware/authenticate');
+const {savePlatform} = require('../middleware/validateplatform')
 
 router.get('/', platformController.getAll);
 router.get('/:id', platformController.getSingle);
 
-router.post('/', platformController.create);
+router.post("/", savePlatform, platformController.create)
 
-router.put('/:id', platformController.modify);
+router.put("/:id", savePlatform, platformController.modify)
 
 router.delete('/:id', platformController.deleteOne);
 
