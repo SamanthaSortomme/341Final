@@ -16,7 +16,9 @@ router.get('/logout', function (req, res, next) {
 router.use('/', require('./swagger'));
 router.use('/game', require('./game'));
 router.use('/user', require('./user'));
+router.use('/platform', require('./platform'));
 router.use('/profile', require('./profile'));
+
 
 module.exports = router;
 
