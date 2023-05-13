@@ -74,7 +74,7 @@ const create = async (req, res, next) => {
     })
 
     res.setHeader("Content-Type", "application/json")
-    // #swagger.responses[200]={description: "Game created" }
+    // #swagger.responses[201]={description: "Game created" }
     res.status(201).json({ id: result.insertedId })
   }
 };

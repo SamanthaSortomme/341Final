@@ -91,11 +91,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Game  "
-          },
           "201": {
-            "description": "Created"
+            "description": "Game  "
           },
           "400": {
             "description": "Bad Request"
