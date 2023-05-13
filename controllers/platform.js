@@ -9,8 +9,6 @@ const getAll = async (req, res, next) => {
   try {
     const db = await mongodb.getDb()
     const result = await db.db("341Final").collection("platform").find()
-    // this does same thing
-    // const result = await (await mongodb.getDb()).db('341Final').collection('platform').find();
     result.toArray().then((lists) => {
       res.setHeader("Content-Type", "application/json")
       // #swagger.responses[200]={description: "All platforms found" }
@@ -145,4 +143,3 @@ const deleteOne = async (req, res, next) => {
 }
 
 module.exports = { getAll, getSingle, create, modify, deleteOne }
-
