@@ -2,8 +2,8 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
   info: {
-    title: "My API",
-    description: "Contact API",
+    title: "Gaming API",
+    description: "An API for a gaming website to connect users with games, platforms and mods.",
   },
   host: "three41final.onrender.com",
   schemes: ["https"],
