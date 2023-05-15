@@ -543,6 +543,166 @@
           }
         }
       }
+    },
+    "/mod/": {
+      "get": {
+        "tags": [
+          "Mod"
+        ],
+        "summary": "Get all mods",
+        "description": "Get all the mods",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "All mods found"
+          },
+          "500": {
+            "description": "Internal Service Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Mod"
+        ],
+        "summary": "Create a mod",
+        "description": "Create a mod",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mod": {
+                  "example": "any"
+                },
+                "game": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "cost": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Mod created"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Service Error"
+          }
+        }
+      }
+    },
+    "/mod/{id}": {
+      "get": {
+        "tags": [
+          "Mod"
+        ],
+        "summary": "Get mod by id",
+        "description": "Get a single mod by id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mod found"
+          },
+          "404": {
+            "description": "Mod not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Mod"
+        ],
+        "summary": "Update a mod",
+        "description": "Update a mod by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mod": {
+                  "example": "any"
+                },
+                "game": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "cost": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Mod updated"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Service Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Mod"
+        ],
+        "summary": "Delete a mod",
+        "description": "Delete a mod by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mod deleted"
+          },
+          "500": {
+            "description": "Internal Service Error"
+          }
+        }
+      }
     }
   }
 }
