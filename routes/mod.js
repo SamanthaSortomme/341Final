@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const modController = require("../controllers/mod");
 const {saveMod} = require('../middleware/validateMod')
-const modController = require("../controller/mod");
 
 router.get("/", modController.getAll);
 
@@ -14,3 +14,4 @@ router.put("/:id",saveMod, modController.updateMod);
 router.delete("/:id", modController.deleteMod);
 
 module.exports = router;
+

@@ -19,3 +19,7 @@ const saveMod = (req, res, next) => {
     }
   });
 };
+
+module.exports = {
+  saveMod,
+}
