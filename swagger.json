@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Gaming API",
-    "description": "An API with collections for Games, Users, Platforms and Mods",
+    "description": "An API for a gaming website to connect users with games, platforms and mods.",
     "version": "1.0.0"
   },
   "host": "three41final.onrender.com",
