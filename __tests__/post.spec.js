@@ -11,15 +11,15 @@ describe("Test Handlers", () => {
     expect(res.header["content-type"]).toBe("application/json; charset=utf-8")
   })
 
-  //   test("responds to post /user", async () => {
-  //     const res = await request.post("/user").send({
-  //       firstName: "Sonic",
-  //       lastName: "TheHedgehog",
-  //       gamesPlayed: "18",
-  //     });
-  //     expect(res.statusCode).toBe(201);
-  //     expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
-  //   });
+    // test("responds to post /user", async () => {
+    //   const res = await request.post("/user").send({
+    //     firstName: "Sonic",
+    //     lastName: "TheHedgehog",
+    //     gamesPlayed: "18",
+    //   });
+    //   expect(res.statusCode).toBe(201);
+    //   expect(res.header["content-type"]).toBe("application/json; charset=utf-8");
+    // });
 
   // test('responds to get /user by id', async () => {
   //     const res = await request.get('/user/645dab77d10178e68110fc48')
@@ -65,30 +65,30 @@ describe("Test Handlers", () => {
   })
 
   test('responds to get /game by id', async () => {
-      const res = await request.get('/game/6462eda305a5adfc35618af2')
+      const res = await request.get("/game/646452a591678e3b16042abf")
       expect(res.statusCode).toBe(200)
       expect(res.header['content-type']).toBe('application/json; charset=utf-8');
 
   })
 
   test('responds to put /game', async () => {
-      const res = await request.put('/game/6462eda305a5adfc35618af2').send({
-          gameTitle: "this is a test",
-          releaseYear: "1",
-          language: "English",
-          gameLength: "3x longer than it should be",
-          rating: "pg",
-          specialFeatures: "testing code for CSE341",
-          cost: "$80 per credit"
-      });
+      const res = await request.put("/game/646452a591678e3b16042abf").send({
+        gameTitle: "this is a test",
+        releaseYear: "1",
+        language: "English",
+        gameLength: "3x longer than it should be",
+        rating: "pg",
+        specialFeatures: "testing code for CSE341",
+        cost: "$80 per credit",
+      })
       expect(res.statusCode).toBe(204);
   })
 
-  // test('responds to delete /game by id', async () => {
-  //     const res = await request.delete('/game/64596fc7f00d9cb76d53421b');
-  //     expect(res.statusCode).toBe(200)
-  //     expect(res.header['content-type']).toBe('application/json; charset=utf-8');
-  // })
+  test('responds to delete /game by id', async () => {
+      const res = await request.delete("/game/646452a591678e3b16042abf")
+      expect(res.statusCode).toBe(200)
+      expect(res.header['content-type']).toBe('application/json; charset=utf-8');
+  })
 
   //////-----------PLATFORM TESTS
 
@@ -109,19 +109,25 @@ describe("Test Handlers", () => {
   })
 
   test("responds to get /platform by id", async () => {
-    const res = await request.get("/platform/645ef2d6145cfd41ce698dc6")
+    const res = await request.get("/platform/646452a691678e3b16042ac0")
     expect(res.statusCode).toBe(200)
     expect(res.header["content-type"]).toBe("application/json; charset=utf-8")
   })
 
   test("responds to put /platform", async () => {
-    const res = await request.put("/platform/6462efa6cabf67efb5376399").send({
+    const res = await request.put("/platform/646452a691678e3b16042ac0").send({
       platformName: "Nintendo NES",
       companyName: "Nintendo",
       price: "99",
     })
     expect(res.statusCode).toBe(204)
   })
+
+    test("responds to delete /platform by id", async () => {
+      const res = await request.delete("/platform/646452a691678e3b16042ac0")
+      expect(res.statusCode).toBe(200)
+      expect(res.header["content-type"]).toBe("application/json; charset=utf-8")
+    })
 
   //////------------end of platform tests
 
@@ -144,13 +150,13 @@ describe("Test Handlers", () => {
   })
 
   test("responds to get /mod by id", async () => {
-    const res = await request.get("/mod/64627ca5f0db6165530553d0")
+    const res = await request.get("/mod/46452a691678e3b16042ac1")
     expect(res.statusCode).toBe(200)
     expect(res.header["content-type"]).toBe("application/json; charset=utf-8")
   })
 
   test("responds to put /mod", async () => {
-    const res = await request.put("/mod/64627ca5f0db6165530553d0").send({
+    const res = await request.put("/mod/46452a691678e3b16042ac1").send({
       mod: "Stardew Valley Expanded",
       game: "Stardew Valley",
       description: "Adds new locations, new characters, and new village",
@@ -158,6 +164,15 @@ describe("Test Handlers", () => {
     })
     expect(res.statusCode).toBe(204)
   })
+
+      test("responds to delete /mod by id", async () => {
+        const res = await request.delete("/mod/646452a691678e3b16042ac1")
+        expect(res.statusCode).toBe(200)
+        expect(res.header["content-type"]).toBe(
+          "application/json; charset=utf-8"
+        )
+      })
+
 
   //////------------end of mod test
 
